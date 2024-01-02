@@ -1,0 +1,38 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+
+    <table class="tabla-productos">
+        <tr>
+            <td class="encabezadoProducto">Nombre</td>
+            <td class="encabezadoProducto">Marca</td>
+            <td class="encabezadoProducto">Modelo</td>
+            <td class="encabezadoProducto">Precio</td>
+            <td class="encabezadoProducto">Unidades</td>
+            <td class="encabezadoProducto">Editar</td>
+            <td class="encabezadoProducto">Eliminar</td>
+        </tr>
+
+        {% for producto in Productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.marca }}</td>
+                <td>{{ producto.modelo }}</td>
+                <td>{{ producto.precio }}€</td>
+                <td>{{ producto.unidades }}</td>
+                <td class="accion">
+                    <button type="action"><a href="{% url 'editarProducto' pk=producto.pk %}">Editar</a></button>
+                </td>
+                <td class="accion">
+                    <button type="action"><a href="{% url 'confirmarEliminarProducto' pk=producto.pk %}">Eliminar producto</a></button>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <button type="action" class="añadir-producto"><a href="{% url 'añadirProducto' %}">Añadir producto</a></button>
+
+{% endblock %}

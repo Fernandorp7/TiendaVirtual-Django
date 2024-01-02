@@ -1,0 +1,21 @@
+{% extends 'tienda/base.html' %}
+            		
+{% block content %}
+
+    <h1 class="titulo-editar">Página de Editar Producto</h1>
+
+    <div class="contenedor-editar">
+        <form method="post" class="formulario-editar">
+            {% csrf_token %}
+            <div class="campo-editar">Nombre: {{ form.nombre }}</div>
+            <div class="campo-editar">Marca: {{ form.marca }}</div>
+            <div class="campo-editar">Modelo: {{ form.modelo }}</div>
+            <div class="campo-editar">Precio: {{ form.precio }} €</div>
+            <div class="campo-editar">Unidades: {{ form.unidades }}</div>
+            <div class="campo-editar">Vip: {{ form.vip }}</div>
+            <br class="salto-de-linea-editar">
+            <button type="submit" class="boton-guardar-cambios">Guardar Cambios</button>
+        </form>
+    </div>
+    
+{% endblock %}

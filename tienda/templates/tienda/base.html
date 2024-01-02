@@ -1,0 +1,49 @@
+{% load static %}
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Tienda virtual</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+
+<body class="cuerpoGeneral">
+
+    <div class="encabezado">
+        <h1 class="tituloEncabezado"><a href="/">Tienda Virtual</a></h1>
+
+        {% if request.user.is_authenticated %}
+            <div class="bienvenidaUsuario">¡Bienvenido, {{ request.user.username }}!</div>
+            <div class="botonCerrarSesion">
+                <button type="submit"><h3><a href="{% url 'cerrarSesion' %}">Cerrar Sesión</a></h3></button>
+            </div>
+        {% else %}
+            <div class="botonContainer">
+                <div class="botonLogin">
+                    <button type="submit" class="btnLogin"><h3><a href="{% url 'iniciarSesion' %}?next={{ request.path }}">Iniciar Sesión</a></h3></button>
+                </div>
+                <div class="botonRegistrar">
+                    <button type="submit" class="btnRegistrar"><h3><a href="{% url 'registrarse' %}?next={{ request.path }}">Registrarse</a></h3></button>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <div class="contenidoPrincipal">
+        <div class="contenidoInterno">
+            <div class="bloqueContenido">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

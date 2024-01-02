@@ -1,0 +1,27 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+
+    <div class="log-container">
+        <br>
+        <h2 class="log-title">Iniciar Sesión</h2>
+
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="{% if message.tags %}alert alert-{{ message.tags }}{% endif %}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" class="log-form">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button type="submit" class="enviar-button">Enviar</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+
+    <h1 class="titulo-checkout">Resumen de Compra</h1>
+
+    <div class="resumen-compra">
+        <div class="detalle-compra">
+            <div class="fecha">{{ compra.fecha }}</div>
+            <div class="precio-producto">Precio del producto {{ producto.precio }}€</div>
+            <div class="unidades-compradas">Unidades compradas {{ compra.unidades }}</div>
+            <div class="precio-final">Precio Final {{ importe }}€</div>
+        </div>
+    </div>
+
+    <h2 class="agradecimiento">¡Gracias por su compra!</h2>
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'tienda/base.html' %}
+            		
+{% block content %}
+
+  
+    <h1 class="titulo-nuevo">Página de Añadir Producto</h1>
+
+    <div class="contenedor-nuevo">
+
+        <form method="post" class="formulario-nuevo">
+
+            {% csrf_token %}
+
+            <div class="campo-nuevo">Nombre: {{ form.nombre }}</div>
+            <div class="campo-nuevo">Marca: {{ form.marca }}</div>
+            <div class="campo-nuevo">Modelo: {{ form.modelo }}</div>
+            <div class="campo-nuevo">Precio: {{ form.precio }} €</div>
+            <div class="campo-nuevo">Unidades: {{ form.unidades }}</div>
+            <div class="campo-nuevo">Vip: {{ form.vip }}</div>
+
+            <br>
+
+            <button type="submit" class="boton-nuevo">Añadir nuevo Producto</button>
+
+        </form>
+
+    </div>
+    
+    
+{% endblock %}

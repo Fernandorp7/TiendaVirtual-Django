@@ -1,0 +1,42 @@
+{% extends 'tienda/base.html' %}
+            		
+{% block content %}
+
+    <h1 class="titulo-compra">Página de Compra</h1>
+
+    <div class="contenedor-compra">
+
+        <div class="detalles-compra">
+            <img src="https://png.pngtree.com/png-vector/20221114/ourmid/pngtree-shirt-cloth-clothing-silhouette-vector-png-image_34642484.png" alt="{{ producto.nombre }}">
+            <div class="detalle-compra">Nombre:<div>{{ producto.nombre }}</div></div>
+            <div class="detalle-compra">Marca:<div>{{ producto.marca }}</div></div>
+            <div class="detalle-compra">Modelo:<div>{{ producto.modelo }}</div></div>
+            <div class="detalle-compra">Unidades:<div>{{ producto.unidades }}</div></div>
+            <div class="detalle-compra">Precio:<div>{{ producto.precio }}€</div></div>
+            <br>
+
+            {% if producto.vip %}
+                <div class="vip-compra"> El producto es vip</div>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+                <form method="post" class="formulario-compra">
+                    {% csrf_token %}
+                    <div class="detalle-compra">Unidades a comprar: {{ form.unidades }} <button type="submit">Comprar</button></div>
+                </form>
+
+                {% if messages %}
+                    <div class="mensaje-error">
+                        {% for message in messages %}
+                            Error: {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+
+    </div>
+    
+{% endblock %}

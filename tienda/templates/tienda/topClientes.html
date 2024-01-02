@@ -1,0 +1,13 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+
+    <h1 class="titulo-top-clientes">Top Clientes</h1>
+
+    <ul class="lista-top-clientes">
+        {% for cliente in clientes %}
+            <li class="item-top-cliente">{{ cliente.user.username }}, ha gastado un total de: {{ cliente.dinero|floatformat:2 }}€</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

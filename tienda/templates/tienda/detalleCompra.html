@@ -1,0 +1,19 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+
+    <h1 class="titulo-detalle-compra">Historial de tus compras</h1>
+
+    {% for compra in compras %}
+        <div class="detalle-compra">
+            <div class="info-producto">
+                <h3 class="nombre-producto">{{ compra.producto.nombre }}</h3>
+                <div class="marca-producto">Marca: {{ compra.producto.marca }}</div>
+                <div class="fecha-compra">Fecha: {{ compra.fecha }}</div>
+                <div class="unidades-compra">Unidades: {{ compra.unidades }}</div>
+                <div class="importe-compra">Importe: {{ compra.importe }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

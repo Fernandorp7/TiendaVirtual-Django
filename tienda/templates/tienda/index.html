@@ -1,0 +1,61 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+
+    <header class="headerIndex">
+        <div class="portadaIndex">
+            <h1 class="tituloIndex">¡Bienvenidos a la Tienda de Fer!</h1>
+            <p class="parrafoIndex">Sumérgete en un mundo de elegancia y estilo, donde tus elecciones reflejan tu personalidad.
+            Descubre las últimas tendencias y encuentra la combinación perfecta para cada ocasión.</p>
+        </div>
+
+        <img src="https://blog.xtipografias.com/wp-content/uploads/2015/03/fabfelt-1.png" class="imagenTienda">
+    </header>
+
+    <form method="post" class="formulario-busqueda">
+        {% csrf_token %}
+        {{ filtro_busqueda.as_p }}
+        <button type="submit" class="boton-buscar">Buscar</button>
+        <button type="reset" class="boton-reseteo">Resetear</button>
+    </form>
+
+    {% if Productos.count == 0 and filtro_prod.is_bound %}
+        <p>No se encontraron resultados para la búsqueda "{{ filtro_prod.cleaned_data.nombre }}".</p>
+    {% endif %}
+
+
+    <div class="productos">
+        {% for producto in Productos %}
+            <div class="producto">
+                <img src="https://png.pngtree.com/png-vector/20221114/ourmid/pngtree-shirt-cloth-clothing-silhouette-vector-png-image_34642484.png" alt="{{ producto.nombre }}">
+                <div class="nombre-modelo">{{ producto.nombre }} {{ producto.modelo }}</div>
+                <h4 class="marca">{{ producto.marca }}</h4>
+                <div class="precio-y-comprar">
+                    <div class="precio">{{ producto.precio }}€</div>
+                    <div class="comprar">
+                        <button type="action" class="boton-comprar"><a href="{% url 'comprarProducto' pk=producto.pk %}">Comprar</a></button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if request.user.is_staff %}
+        <ul class="menu-admin">
+            <li><a href="{% url 'productos' %}" class="enlace-gestion-productos">Gestión de productos</a></li>
+            <li><a class="enlace-informe-compras" href="{% url 'informeCompras' %}">Tu historial de Compras</a></li>
+            <li class="dropdown"><a class="enlace-informes" data-bs-toggle="dropdown" role="button" aria-expanded="false">Informes</a>
+                <ul class="submenu-informes dropdown-menu">
+                    <li><a class="dropdown-item enlace-informe-marca" href="{% url 'informeMarca' %}">Marcas</a></li>
+                    <li><a class="dropdown-item enlace-informe-ventas" href="{% url 'informeVentas' %}">Top Ventas</a></li>
+                    <li><a class="dropdown-item enlace-informe-clientes" href="{% url 'informeClientes' %}">Top Clientes</a></li>
+                </ul>
+            </li>
+        </ul>
+    {% elif request.user.is_authenticated %}
+        <ul class="menu-admin">
+            <li><a class="enlace-informe-compras" href="{% url 'informeCompras' %}">Tu historial de Compras</a></li>
+        </ul>
+    {% endif %}
+
+{% endblock %}
